@@ -2,129 +2,58 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Registro de Usuario</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #2c2f48;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    .container {
-      background: #3c3f5c;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.4);
-      width: 320px;
-      color: white;
-      text-align: center;
-    }
-    h2 {
-      margin-bottom: 15px;
-      color: #f1f1f1;
-    }
-    .input-group {
-      position: relative;
-      margin: 12px 0;
-    }
-    input {
-      width: 100%;
-      padding: 12px 35px 12px 10px;
-      border: none;
-      border-radius: 8px;
-      outline: none;
-    }
-    .icon {
-      position: absolute;
-      right: 10px;
-      top: 12px;
-      color: #666;
-      cursor: pointer;
-    }
-    .btn {
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 8px;
-      font-size: 15px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-    .btn-primary {
-      background: orange;
-      color: white;
-      font-weight: bold;
-    }
-    .btn-primary:hover {
-      background: darkorange;
-    }
-    .btn-cancel {
-      background: #5c6bc0;
-      color: white;
-    }
-    .btn-cancel:hover {
-      background: #3f51b5;
-    }
-    .msg {
-      margin-top: 5px;
-      font-size: 13px;
-    }
-    .error {
-      color: #ff5252;
-    }
-    .ok {
-      color: #4caf50;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crear Cuenta</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h2>Register</h2>
-    <form id="registerForm">
+  <div class="login-container">
+    <h2>Crear Cuenta</h2>
+    <form>
+      <!-- Usuario -->
       <div class="input-group">
-        <input type="text" id="username" placeholder="User Name" required>
+        <span class="icon">👤</span>
+        <input type="text" placeholder="Nombre de usuario" required minlength="3">
       </div>
+
+      <!-- Email -->
       <div class="input-group">
-        <input type="tel" id="phone" placeholder="Phone Number" required>
+        <span class="icon">📧</span>
+        <input type="email" placeholder="Correo electrónico" required>
       </div>
+
+      <!-- Contraseña -->
       <div class="input-group">
-        <input type="email" id="email" placeholder="Email Address" required>
+        <span class="icon">🔒</span>
+        <input type="password" id="password" placeholder="Contraseña" required minlength="6">
       </div>
+
+      <!-- Confirmar contraseña -->
       <div class="input-group">
-        <input type="password" id="password" placeholder="Password" required>
-        <span class="icon" onclick="togglePassword('password')">👁️</span>
+        <span class="icon">🔒</span>
+        <input type="password" id="confirm-password" placeholder="Confirmar contraseña" required minlength="6">
       </div>
-      <div class="input-group">
-        <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
-        <span class="icon" onclick="togglePassword('confirmPassword')">👁️</span>
-      </div>
-      <div id="msg" class="msg"></div>
-      <button type="submit" class="btn btn-primary">Create Account</button>
-      <button type="button" class="btn btn-cancel">Cancel</button>
+
+      <!-- Botón -->
+      <button type="submit" class="btn">Registrarse</button>
+
+      <!-- Enlace para volver -->
+      <p class="register-link">
+        ¿Ya tienes cuenta? <a href="index.html">Inicia sesión</a>
+      </p>
     </form>
   </div>
 
   <script>
-    function togglePassword(id) {
-      const input = document.getElementById(id);
-      input.type = input.type === "password" ? "text" : "password";
-    }
-
-    document.getElementById("registerForm").addEventListener("submit", function(e) {
-      e.preventDefault();
+    // Validar que las contraseñas coincidan
+    const form = document.querySelector("form");
+    form.addEventListener("submit", function(event) {
       const pass = document.getElementById("password").value;
-      const confirm = document.getElementById("confirmPassword").value;
-      const msg = document.getElementById("msg");
+      const confirm = document.getElementById("confirm-password").value;
 
       if (pass !== confirm) {
-        msg.textContent = "❌ Las contraseñas no coinciden";
-        msg.className = "msg error";
-      } else {
-        msg.textContent = "✔ Cuenta creada con éxito";
-        msg.className = "msg ok";
-        // Aquí iría la lógica de enviar datos al servidor (PHP, Node, etc.)
+        event.preventDefault();
+        alert("Las contraseñas no coinciden ❌");
       }
     });
   </script>
