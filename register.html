@@ -3,57 +3,86 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Crear Cuenta</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Registro</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .register-container {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      width: 100%;
+      max-width: 400px;
+    }
+    .form-control:focus {
+      border-color: #4facfe;
+      box-shadow: 0 0 0 0.2rem rgba(79,172,254,0.25);
+    }
+    .btn-primary {
+      background: #4facfe;
+      border: none;
+    }
+    .btn-primary:hover {
+      background: #00c6ff;
+    }
+  </style>
 </head>
 <body>
-  <div class="login-container">
-    <h2>Crear Cuenta</h2>
+  <div class="register-container">
+    <h2 class="text-center mb-4">Crear cuenta</h2>
     <form>
-      <!-- Usuario -->
-      <div class="input-group">
-        <span class="icon">👤</span>
-        <input type="text" placeholder="Nombre de usuario" required minlength="3">
+      <!-- Nombre -->
+      <div class="mb-3">
+        <label for="name" class="form-label">Nombre completo</label>
+        <input type="text" class="form-control" id="name" placeholder="Ingresa tu nombre" required>
       </div>
-
-      <!-- Email -->
-      <div class="input-group">
-        <span class="icon">📧</span>
-        <input type="email" placeholder="Correo electrónico" required>
+      <!-- Correo -->
+      <div class="mb-3">
+        <label for="email" class="form-label">Correo electrónico</label>
+        <input type="email" class="form-control" id="email" placeholder="ejemplo@email.com" required>
       </div>
-
+      <!-- Teléfono -->
+      <div class="mb-3">
+        <label for="phone" class="form-label">Número de teléfono</label>
+        <input type="tel" class="form-control" id="phone" placeholder="987654321" pattern="[0-9]{9,}" minlength="9" maxlength="15" required>
+        <div class="form-text">Debe tener al menos 9 dígitos.</div>
+      </div>
       <!-- Contraseña -->
-      <div class="input-group">
-        <span class="icon">🔒</span>
-        <input type="password" id="password" placeholder="Contraseña" required minlength="6">
+      <div class="mb-3">
+        <label for="password" class="form-label">Contraseña</label>
+        <input type="password" class="form-control" id="password" placeholder="********" minlength="6" required>
       </div>
-
-      <!-- Confirmar contraseña -->
-      <div class="input-group">
-        <span class="icon">🔒</span>
-        <input type="password" id="confirm-password" placeholder="Confirmar contraseña" required minlength="6">
+      <!-- Confirmar Contraseña -->
+      <div class="mb-3">
+        <label for="confirmPassword" class="form-label">Confirmar contraseña</label>
+        <input type="password" class="form-control" id="confirmPassword" placeholder="********" minlength="6" required>
       </div>
-
       <!-- Botón -->
-      <button type="submit" class="btn">Registrarse</button>
-
-      <!-- Enlace para volver -->
-      <p class="register-link">
-        ¿Ya tienes cuenta? <a href="index.html">Inicia sesión</a>
-      </p>
+      <button type="submit" class="btn btn-primary w-100">Registrarse</button>
+      <div class="text-center mt-3">
+        <a href="index.html">¿Ya tienes cuenta? Inicia sesión</a>
+      </div>
     </form>
   </div>
 
   <script>
-    // Validar que las contraseñas coincidan
     const form = document.querySelector("form");
-    form.addEventListener("submit", function(event) {
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
       const pass = document.getElementById("password").value;
-      const confirm = document.getElementById("confirm-password").value;
-
-      if (pass !== confirm) {
-        event.preventDefault();
-        alert("Las contraseñas no coinciden ❌");
+      const confirmPass = document.getElementById("confirmPassword").value;
+      if (pass !== confirmPass) {
+        alert("Las contraseñas no coinciden.");
+      } else {
+        alert("¡Registro exitoso!");
+        form.reset();
       }
     });
   </script>
