@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro de Usuario</title>
+    <link rel="stylesheet" href="..//css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Register</h2>
+    <form id="registerForm">
+      <div class="input-group">
+        <input type="text" id="username" placeholder="User Name" required>
+      </div>
+      <div class="input-group">
+        <input type="tel" id="phone" placeholder="Phone Number" required>
+      </div>
+      <div class="input-group">
+        <input type="email" id="email" placeholder="Email Address" required>
+      </div>
+      <div class="input-group">
+        <input type="password" id="password" placeholder="Password" required>
+        <span class="icon" onclick="togglePassword('password')">👁️</span>
+      </div>
+      <div class="input-group">
+        <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+        <span class="icon" onclick="togglePassword('confirmPassword')">👁️</span>
+      </div>
+      <div id="msg" class="msg"></div>
+      <button type="submit" class="btn btn-primary">Create Account</button>
+      <button type="button" class="btn btn-cancel">Cancel</button>
+    </form>
+  </div>
+
+  <script>
+    function togglePassword(id) {
+      const input = document.getElementById(id);
+      input.type = input.type === "password" ? "text" : "password";
+    }
+
+    document.getElementById("registerForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const pass = document.getElementById("password").value;
+      const confirm = document.getElementById("confirmPassword").value;
+      const msg = document.getElementById("msg");
+
+      if (pass !== confirm) {
+        msg.textContent = "❌ Las contraseñas no coinciden";
+        msg.className = "msg error";
+      } else {
+        msg.textContent = "✔ Cuenta creada con éxito";
+        msg.className = "msg ok";
+        // Aquí iría la lógica de enviar datos al servidor (PHP, Node, etc.)
+      }
+    });
+  </script>
+</body>
+</html>
